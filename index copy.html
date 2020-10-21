@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>舆情可视化</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://oisanjavax.github.io/echarts-wordcloud/dist/echarts-wordcloud.min.js"></script>
+    <script src="js/dark.js"></script>
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <script src="js/json/数据来源饼图.js"></script>
+    <script src="js/cy.js"></script>
+    <script src="js/data.js"></script>
+    <style>
+        body {
+            background: #081325 url(./img/bg.png) no-repeat;
+            background-size: cover;
+        }
+
+        /* 滚动条设置 */
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+
+        /* 这是针对缺省样式 (必须的) */
+
+        ::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+        }
+
+
+        /* 滚动条的滑轨背景颜色 */
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+
+        /* 滑块颜色 */
+
+        ::-webkit-scrollbar-button {
+            background-color: rgba(0, 0, 0, 0);
+            height: 0;
+        }
+
+
+        /* 滑轨两头的监听按钮颜色 */
+
+        ::-webkit-scrollbar-corner {
+            background-color: black;
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        .header-title {
+            width: 100%;
+            height: 74px;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .header-title h3 {
+            line-height: 50px;
+            font-size: 2.5vw;
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            /* position: relative; */
+        }
+
+        .b-left-top,
+        .b-right-top,
+        .b-left-bottom,
+        .b-right-bottom {
+            position: absolute;
+            width: 13px;
+            height: 13px;
+        }
+
+        .b-left-top {
+            left: 0;
+            top: 0;
+            border-left: solid 2px #045291;
+            border-top: solid 2px #045291;
+        }
+
+        .b-right-top {
+            right: 0;
+            top: 0;
+            border-right: solid 2px #045291;
+            border-top: solid 2px #045291;
+        }
+
+        .b-left-bottom {
+            left: 0;
+            bottom: 0;
+            border-left: solid 2px #045291;
+            border-bottom: solid 2px #045291;
+        }
+
+        .b-right-bottom {
+            right: 0;
+            bottom: 0;
+            border-right: solid 2px #045291;
+            border-bottom: solid 2px #045291;
+        }
+
+        .top {
+            width: 100%;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top .top-item {
+            height: 350px;
+            width: 32%;
+            margin: 3px;
+            position: relative;
+            float: left;
+            /* box-shadow: 0px 0px 10px 0px #0ff; */
+        }
+
+        .top .top-item-first {
+            width: 35%;
+        }
+
+        .top .top-item-second {
+            width: 25%;
+        }
+
+        .top .top-item-third {
+            width: 15%;
+        }
+
+        .top .top-item-four {
+            width: 20%;
+        }
+
+        .bottom {
+            width: 100%;
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom .bottom-item {
+            height: 450px;
+            width: 40%;
+            margin: 3px;
+            position: relative;
+            float: left;
+        }
+
+        .bottom .bottom-item-second {
+            width: 18%;
+        }
+
+        .item-title {
+            color: #1bb4f9;
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .item-table {
+            height: 85%;
+            width: 100%;
+        }
+    </style>
+            <style>
+                .topRec_List dl,
+                .maquee {
+                    width: 100%;
+                    margin: 0 auto;
+                    color: #f0ece2;
+                    text-align: center;
+                    float: left;
+                }
+
+                .topRec_List dd {
+                    float: left;
+                    text-align: center;
+                    border-bottom: 1px solid #1B96EE;
+                    color: #1B96EE;
+                    font-size: 14px;
+                    margin: 0 auto;
+                }
+
+                .maquee {
+                    height: 265px;
+                    overflow-x: hidden;
+                    overflow-y: display;
+                }
+
+                .topRec_List dl dd:nth-child(1) {
+                    width: 60%;
+                    height: 30px;
+                    line-height: 30px;
+                    margin-left: 3%;
+                }
+
+                .topRec_List dl dd:nth-child(2) {
+                    width: 30%;
+                    height: 30px;
+                    line-height: 30px;
+                }
+
+                .topRec_List ul {
+                    width: 100%;
+                }
+
+                .topRec_List li {
+                    width: 100%;
+                    height: 38px;
+                    line-height: 38px;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #76dbd1
+                }
+
+                .topRec_List li div {
+                    float: left;
+                }
+
+                .topRec_List li div:nth-child(1) {
+                    width: 50%;
+                }
+
+                .topRec_List li div:nth-child(2) {
+                    width: 30%;
+                }
+
+                .topRec_List li div:nth-child(3) {
+                    width: 20%;
+                }
+            </style>
+</head>
+
+<body>
+    <div class="header-title">
+        <h3>舆情可视化界面</h3>
+    </div>
+    <div class="container">
+        <div class="top">
+            <div class="top-item top-item-first">
+                <div class="item-title">舆情数据来源</div>
+                <div class="item-table" id="table1"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="top-item top-item-second">
+                <div class="item-title">热点词</div>
+                <div class="item-table" id="table2"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="top-item top-item-third">
+                <div class="item-title">舆情占比</div>
+                <div class="item-table" id="table3"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="top-item top-item-four">
+                <div class="item-title">TOP10 关键词</div>
+                <div class="item-table" id="table4">
+                    <div class="topRec_List">
+                        <dl>
+                            <dd>涉及内容</dd>
+                            <dd>舆情量</dd>
+                        </dl>
+                        <div class="maquee">
+                            <ul style="margin-top: 0px;">
+                                <li>
+                                    <div>暴力催收</div>
+                                    <div>1049</div>
+                                </li>
+                                <li>
+                                    <div>高利贷</div>
+                                    <div>649</div>
+                                </li>
+                                <li>
+                                    <div>产品逾期</div>
+                                    <div>498</div>
+                                </li>
+                                <li>
+                                    <div>砍头息</div>
+                                    <div>381</div>
+                                </li>
+                                <li>
+                                    <div>骗子</div>
+                                    <div>371</div>
+                                </li>
+                                <li>
+                                    <div>无法回款</div>
+                                    <div>347</div>
+                                </li>
+                                <li>
+                                    <div>提现困难</div>
+                                    <div>326</div>
+                                </li>
+                                <li>
+                                    <div>兑付困难</div>
+                                    <div>324</div>
+                                </li>
+                                <li>
+                                    <div>客服态度恶劣</div>
+                                    <div>245</div>
+                                </li>
+                                <li>
+                                    <div>高额服务费</div>
+                                    <div>202</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="bottom-item bottom-item-first">
+                <div class="item-title">热点词</div>
+                <div class="item-table" id="table5"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="bottom-item bottom-item-second">
+                <div class="item-title">热点词</div>
+                <div class="item-table" id="table6"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="bottom-item bottom-item-third">
+                <div class="item-title">热点词</div>
+                <div class="item-table" id="table7"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        echarts.init(document.getElementById("table1")).setOption((() => {
+            var app = {};
+            var option = null;
+            var labels = [];
+            for (var val of table1) {
+                labels.push(val["name"]);
+            }
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: '2%',
+                    data: labels,
+                    textStyle: {
+                        color: "#fff"
+                    }
+                },
+                series: [{
+                    name: '数据来源',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['65%', '50%'],
+                    data: table1,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 7,
+                            shadowColor: 'rgba(0, 110, 127, 0.6)'
+                        }
+                    },
+                    label: {            //饼图图形上的文本标签
+                        normal: {
+                            show: true,
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }]
+            };
+            return option;
+        })(), true);
+
+        //table2
+        function initTable2() {
+            var myChart = echarts.init(document.getElementById('table2'));
+
+            var presents = [];
+            var data = [];
+            for (var val of table2) {
+                presents.push(val["name"]);
+                data.push({
+                    name: val["name"],
+                    value: val["count"]
+                });
+            }
+            var maskImage = new Image();
+            maskImage.onload = function () {
+                myChart.setOption({
+                    tooltip: {
+                        show: true
+                    },
+                    grid: {
+                        left: 0,
+                        bottom: 0,
+                        top: 0,
+                        right: 0,
+                    },
+                    xAxis: {
+                        type: "category",
+                        show: false
+                    },
+                    yAxis: {
+                        max: 100,
+                        show: false
+                    },
+                    series: [{
+                        zlevel: -1,
+                        type: 'pictorialBar',
+                        name: 'pictorial',
+                        silent: true,
+                        symbol: 'image://' + symbolUrl,
+                        symbolSize: ['90%', '125%'],
+                        symbolPosition: 'center',
+                        barWidth: '100%',
+                        barMaxWidth: '100%',
+                        itemStyle: {
+                            normal: {
+                                opacity: 0.1
+                            }
+                        },
+                        data: [{
+                            value: 100
+                        }]
+                    }, {
+                        type: 'wordCloud',
+                        sizeRange: [11, 34],
+                        rotationRange: [-90, 90],
+                        maskImage: maskImage,
+                        textPadding: 0,
+                        gridSize: 5,
+                        width: '90%',
+                        height: '125%',
+                        left: 'center',
+                        top: 'center',
+                        drawOutOfBound: false,
+                        textStyle: {
+                            normal: {
+                                color: function () {
+                                    return 'rgb(' + [
+                                        Math.round(Math.random() * 255) % 150 + 100,
+                                        Math.round(Math.random() * 255) % 150 + 100,
+                                        Math.round(Math.random() * 255) % 150 + 100
+                                    ].join(',') + ')';
+                                }
+                            },
+                        },
+                        data: data
+                    },]
+                });
+            };
+            maskImage.src = symbolUrl;
+        }
+        initTable2();
+
+        //table3
+        echarts.init(document.getElementById("table3")).setOption((() => {
+            var option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                series: [{
+                    name: '舆情占比',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '50%'],
+                    data: [{ name: "正面", value: 23353 }, { name: "负面", value: 2701 }, { name: "中性", value: 2419 }],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 7,
+                            shadowColor: 'rgba(0, 110, 127, 0.6)'
+                        }
+                    },
+                    label: {            //饼图图形上的文本标签
+                        normal: {
+                            show: true,
+                            textStyle: {
+                                fontWeight: 300,
+                                fontSize: 16,    //文字的字体大小
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }]
+            };
+            return option;
+        })(), true);
+    </script>
+</body>
+
+</html>
