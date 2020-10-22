@@ -1,4 +1,4 @@
-var table1 = [{
+var table5 = [{
         "date": "2016-01-01",
         "positive": 4,
         "negative": 8,

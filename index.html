@@ -2,255 +2,60 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>舆情可视化</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <script src="https://oisanjavax.github.io/echarts-wordcloud/dist/echarts-wordcloud.min.js"></script>
-    <script src="js/dark.js"></script>
+    <link href="./css/dh.css" rel="stylesheet" type="text/css">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script src="js/echarts-wordcloud.min.js"></script>
+    <script src="js/dark.js"></script>
     <script src="js/json/数据来源饼图.js"></script>
     <script src="js/cy.js"></script>
     <script src="js/data.js"></script>
-    <style>
-        body {
-            background: #081325 url(./img/bg.png) no-repeat;
-            background-size: cover;
-        }
-
-        /* 滚动条设置 */
-
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-
-        /* 这是针对缺省样式 (必须的) */
-
-        ::-webkit-scrollbar-track {
-            background-color: rgba(0, 0, 0, 0);
-            border-radius: 10px;
-        }
-
-
-        /* 滚动条的滑轨背景颜色 */
-
-        ::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-
-        /* 滑块颜色 */
-
-        ::-webkit-scrollbar-button {
-            background-color: rgba(0, 0, 0, 0);
-            height: 0;
-        }
-
-
-        /* 滑轨两头的监听按钮颜色 */
-
-        ::-webkit-scrollbar-corner {
-            background-color: black;
-        }
-
-        div {
-            box-sizing: border-box;
-        }
-
-        .header-title {
-            width: 100%;
-            height: 74px;
-            text-align: center;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        .header-title h3 {
-            line-height: 50px;
-            font-size: 2.5vw;
-            font-weight: 800;
-            color: #fff;
-            margin: 0;
-        }
-
-        .container {
-            width: 100%;
-            /* position: relative; */
-        }
-
-        .b-left-top,
-        .b-right-top,
-        .b-left-bottom,
-        .b-right-bottom {
-            position: absolute;
-            width: 13px;
-            height: 13px;
-        }
-
-        .b-left-top {
-            left: 0;
-            top: 0;
-            border-left: solid 2px #045291;
-            border-top: solid 2px #045291;
-        }
-
-        .b-right-top {
-            right: 0;
-            top: 0;
-            border-right: solid 2px #045291;
-            border-top: solid 2px #045291;
-        }
-
-        .b-left-bottom {
-            left: 0;
-            bottom: 0;
-            border-left: solid 2px #045291;
-            border-bottom: solid 2px #045291;
-        }
-
-        .b-right-bottom {
-            right: 0;
-            bottom: 0;
-            border-right: solid 2px #045291;
-            border-bottom: solid 2px #045291;
-        }
-
-        .top {
-            width: 100%;
-            min-height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .top .top-item {
-            height: 350px;
-            width: 32%;
-            margin: 3px;
-            position: relative;
-            float: left;
-            /* box-shadow: 0px 0px 10px 0px #0ff; */
-        }
-
-        .top .top-item-first {
-            width: 35%;
-        }
-
-        .top .top-item-second {
-            width: 25%;
-        }
-
-        .top .top-item-third {
-            width: 15%;
-        }
-
-        .top .top-item-four {
-            width: 20%;
-        }
-
-        .bottom {
-            width: 100%;
-            min-height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .bottom .bottom-item {
-            height: 450px;
-            width: 40%;
-            margin: 3px;
-            position: relative;
-            float: left;
-        }
-
-        .bottom .bottom-item-second {
-            width: 18%;
-        }
-
-        .item-title {
-            color: #1bb4f9;
-            padding: 10px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .item-table {
-            height: 85%;
-            width: 100%;
-        }
-    </style>
-            <style>
-                .topRec_List dl,
-                .maquee {
-                    width: 100%;
-                    margin: 0 auto;
-                    color: #f0ece2;
-                    text-align: center;
-                    float: left;
-                }
-
-                .topRec_List dd {
-                    float: left;
-                    text-align: center;
-                    border-bottom: 1px solid #1B96EE;
-                    color: #1B96EE;
-                    font-size: 14px;
-                    margin: 0 auto;
-                }
-
-                .maquee {
-                    height: 265px;
-                    overflow-x: hidden;
-                    overflow-y: display;
-                }
-
-                .topRec_List dl dd:nth-child(1) {
-                    width: 60%;
-                    height: 30px;
-                    line-height: 30px;
-                    margin-left: 3%;
-                }
-
-                .topRec_List dl dd:nth-child(2) {
-                    width: 30%;
-                    height: 30px;
-                    line-height: 30px;
-                }
-
-                .topRec_List ul {
-                    width: 100%;
-                }
-
-                .topRec_List li {
-                    width: 100%;
-                    height: 38px;
-                    line-height: 38px;
-                    text-align: center;
-                    font-size: 12px;
-                    color: #76dbd1
-                }
-
-                .topRec_List li div {
-                    float: left;
-                }
-
-                .topRec_List li div:nth-child(1) {
-                    width: 50%;
-                }
-
-                .topRec_List li div:nth-child(2) {
-                    width: 30%;
-                }
-
-                .topRec_List li div:nth-child(3) {
-                    width: 20%;
-                }
-            </style>
+    <script src="js/json/舆情情感折线图2.js"></script>
+    <script src="js/json/舆情变化折线图.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/tween.min.js"></script>
+    <script src="js/TrackballControls.js"></script>
+    <script src="js/CSS3DRenderer.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/animatedModal.js"></script>
 </head>
 
 <body>
+    <div class="box">
+        <div class="change-type">
+            <div class="type-left" :class="showType == true ? 'showListType':''">
+                <ul>
+                    <li><a>首页</a><span></span></li>
+                    <li class="active"><a>舆情可视化</a><span></span></li>
+                    <li><a>舆情分析</a><span></span></li>
+                    <li><a>舆情报告</a><span></span></li>
+                    <li><a>舆情预警</a><span></span></li>
+                    <li><a>舆情行情</a><span></span></li>
+                </ul>
+            </div>
+            <div class="type-right">
+                <p>
+                    <i class="el-icon-menu"></i>
+                    导航
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('.type-right').click(function(){
+                $(this).prev('.type-left').toggleClass('showListType')
+            });
+            $('.type-left ul li').click(function(){
+                $(this).addClass('active').siblings('li').removeClass('active')
+            })
+        })
+    </script>
     <div class="header-title">
         <h3>舆情可视化界面</h3>
     </div>
@@ -265,12 +70,15 @@
                 <span class="b-right-bottom"></span>
             </div>
             <div class="top-item top-item-second">
-                <div class="item-title">热点词</div>
+                <a id="modalTable2" href="#animatedModalTable2">
+                    <div class="item-title">热点词</div>
+                </a>
                 <div class="item-table" id="table2"></div>
                 <span class="b-left-top"></span>
                 <span class="b-right-top"></span>
                 <span class="b-left-bottom"></span>
                 <span class="b-right-bottom"></span>
+
             </div>
             <div class="top-item top-item-third">
                 <div class="item-title">舆情占比</div>
@@ -342,7 +150,9 @@
         </div>
         <div class="bottom">
             <div class="bottom-item bottom-item-first">
-                <div class="item-title">热点词</div>
+                <a id="modalTable5" href="#animatedModalTable5">
+                    <div class="item-title">舆情变化</div>
+                </a>
                 <div class="item-table" id="table5"></div>
                 <span class="b-left-top"></span>
                 <span class="b-right-top"></span>
@@ -350,7 +160,7 @@
                 <span class="b-right-bottom"></span>
             </div>
             <div class="bottom-item bottom-item-second">
-                <div class="item-title">热点词</div>
+                <div class="item-title">有效舆情总量</div>
                 <div class="item-table" id="table6"></div>
                 <span class="b-left-top"></span>
                 <span class="b-right-top"></span>
@@ -358,7 +168,9 @@
                 <span class="b-right-bottom"></span>
             </div>
             <div class="bottom-item bottom-item-third">
-                <div class="item-title">热点词</div>
+                <a id="modalTable7" href="#animatedModalTable7">
+                    <div class="item-title">每月舆情变化量</div>
+                </a>
                 <div class="item-table" id="table7"></div>
                 <span class="b-left-top"></span>
                 <span class="b-right-top"></span>
@@ -367,171 +179,43 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        echarts.init(document.getElementById("table1")).setOption((() => {
-            var app = {};
-            var option = null;
-            var labels = [];
-            for (var val of table1) {
-                labels.push(val["name"]);
+    <div id="animatedModalTable2">
+        <div id="btn-close-modal" class="close-animatedModalTable2">
+            X
+        </div>
+        <div class="modal-content" id="container2">
+        </div>
+    </div>
+    <div id="animatedModalTable5">
+        <div id="btn-close-modal" class="close-animatedModalTable5">
+            X
+        </div>
+        <div class="modal-content" id="container5" style="height: 100vh;width:95%;">
+        </div>
+    </div>
+    <div id="animatedModalTable7">
+        <div id="btn-close-modal" class="close-animatedModalTable7">
+            X
+        </div>
+        <div class="modal-content" id="container7" style="height: 100vh;width:95%;">
+        </div>
+    </div>
+    <script src="js/buildTable.js"></script>
+    <script src="js/3dTable2.js">
+    </script>
+    <script>
+        $("#modalTable5").animatedModal({
+            color: "rgba(0,0,0,0.8)",
+            beforeOpen: function () {
+                randomTable();
             }
-            option = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{a} <br/>{b} : {c} ({d}%)'
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: '2%',
-                    data: labels,
-                    textStyle: {
-                        color: "#fff"
-                    }
-                },
-                series: [{
-                    name: '数据来源',
-                    type: 'pie',
-                    radius: '55%',
-                    center: ['65%', '50%'],
-                    data: table1,
-                    emphasis: {
-                        itemStyle: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 7,
-                            shadowColor: 'rgba(0, 110, 127, 0.6)'
-                        }
-                    },
-                    label: {            //饼图图形上的文本标签
-                        normal: {
-                            show: true,
-                            textStyle: {
-                                color: '#fff'
-                            }
-                        }
-                    }
-                }]
-            };
-            return option;
-        })(), true);
-
-        //table2
-        function initTable2() {
-            var myChart = echarts.init(document.getElementById('table2'));
-
-            var presents = [];
-            var data = [];
-            for (var val of table2) {
-                presents.push(val["name"]);
-                data.push({
-                    name: val["name"],
-                    value: val["count"]
-                });
+        });
+        $("#modalTable7").animatedModal({
+            color: "rgba(0,0,0,0.8)",
+            beforeOpen: function () {
+                randomTable();
             }
-            var maskImage = new Image();
-            maskImage.onload = function () {
-                myChart.setOption({
-                    tooltip: {
-                        show: true
-                    },
-                    grid: {
-                        left: 0,
-                        bottom: 0,
-                        top: 0,
-                        right: 0,
-                    },
-                    xAxis: {
-                        type: "category",
-                        show: false
-                    },
-                    yAxis: {
-                        max: 100,
-                        show: false
-                    },
-                    series: [{
-                        zlevel: -1,
-                        type: 'pictorialBar',
-                        name: 'pictorial',
-                        silent: true,
-                        symbol: 'image://' + symbolUrl,
-                        symbolSize: ['90%', '125%'],
-                        symbolPosition: 'center',
-                        barWidth: '100%',
-                        barMaxWidth: '100%',
-                        itemStyle: {
-                            normal: {
-                                opacity: 0.1
-                            }
-                        },
-                        data: [{
-                            value: 100
-                        }]
-                    }, {
-                        type: 'wordCloud',
-                        sizeRange: [11, 34],
-                        rotationRange: [-90, 90],
-                        maskImage: maskImage,
-                        textPadding: 0,
-                        gridSize: 5,
-                        width: '90%',
-                        height: '125%',
-                        left: 'center',
-                        top: 'center',
-                        drawOutOfBound: false,
-                        textStyle: {
-                            normal: {
-                                color: function () {
-                                    return 'rgb(' + [
-                                        Math.round(Math.random() * 255) % 150 + 100,
-                                        Math.round(Math.random() * 255) % 150 + 100,
-                                        Math.round(Math.random() * 255) % 150 + 100
-                                    ].join(',') + ')';
-                                }
-                            },
-                        },
-                        data: data
-                    },]
-                });
-            };
-            maskImage.src = symbolUrl;
-        }
-        initTable2();
-
-        //table3
-        echarts.init(document.getElementById("table3")).setOption((() => {
-            var option = null;
-            option = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{a} <br/>{b} : {c} ({d}%)'
-                },
-                series: [{
-                    name: '舆情占比',
-                    type: 'pie',
-                    radius: '55%',
-                    center: ['50%', '50%'],
-                    data: [{ name: "正面", value: 23353 }, { name: "负面", value: 2701 }, { name: "中性", value: 2419 }],
-                    emphasis: {
-                        itemStyle: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 7,
-                            shadowColor: 'rgba(0, 110, 127, 0.6)'
-                        }
-                    },
-                    label: {            //饼图图形上的文本标签
-                        normal: {
-                            show: true,
-                            textStyle: {
-                                fontWeight: 300,
-                                fontSize: 16,    //文字的字体大小
-                                color: '#fff'
-                            }
-                        }
-                    }
-                }]
-            };
-            return option;
-        })(), true);
+        });
     </script>
 </body>
 

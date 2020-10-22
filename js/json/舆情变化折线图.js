@@ -1,4 +1,4 @@
-var table1 = [{
+var table7 = [{
         "date": "2016-01-01",
         "count": 43
     },
