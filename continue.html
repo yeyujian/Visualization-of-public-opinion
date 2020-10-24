@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>待开发</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        /*非常重要的样式让背景图片100%适应整个屏幕*/
+        .bg {
+            display: table;
+            width: 100%;
+            height: 100%;
+            padding: 50px 0;
+            text-align: center;
+            color: #fff;
+            background: url(img/bg2.jpg) no-repeat bottom center;
+            background-color: #000;
+            background-size: cover;
+        }
+
+
+        .my-navbar {
+            padding: 20px 0;
+            transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+
+        .my-navbar a {
+            background: transparent !important;
+            color: #fff !important
+        }
+
+        .my-navbar a:hover {
+            color: #45bcf9 !important;
+            background: transparent;
+            outline: 0
+        }
+
+        .my-navbar a {
+            transition: color 0.5s ease-in-out;
+        }
+
+        /*-webkit-transition ;-moz-transition*/
+        .top-nav {
+            padding: 0;
+            background: #000;
+        }
+
+        button.navbar-toggle {
+            background-color: #fbfbfb;
+        }
+
+        /*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+        button.navbar-toggle>span.icon-bar {
+            background-color: #dedede
+        }
+
+
+        .nav-header {
+            background: white;
+            width: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./index.html">舆情可视化系统</a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- <ul class="nav nav-pills"> -->
+                    <li class="active">
+                        <a href="./index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./visualization.html">舆情可视化</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情分析</a>
+                    </li>
+                    <li>
+                        <a href="./report.html">舆情报告</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情预警</a>
+                    </li>
+                    <li>
+                        <a href="./market.html">舆情行情</a>
+                    </li>
+                    <!-- </ul> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="bg" id="showtable"></div>
+
+    <script>
+        $(window).scroll(function () {
+            if ($(".navbar").offset().top > 50) {
+                $(".navbar-fixed-top").addClass("top-nav");
+            } else { $(".navbar-fixed-top").removeClass("top-nav"); }
+        })</script>
+
+ <h1>这里的区域，以后再来探索吧！！待开发中</h1>
+ <br>
+ <h1>这里的区域，以后再来探索吧！！待开发中</h1>
+</body>
+
+</html>

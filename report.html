@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/maptable.js"></script>
+    <title>舆情报告</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        /*非常重要的样式让背景图片100%适应整个屏幕*/
+        .bg {
+            display: table;
+            width: 100%;
+            height: 100%;
+            padding: 50px 0;
+            text-align: center;
+            color: #fff;
+            background: url(img/bg2.jpg) no-repeat bottom center;
+            background-color: #000;
+            background-size: cover;
+        }
+
+
+        .my-navbar {
+            padding: 20px 0;
+            transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+
+        .my-navbar a {
+            background: transparent !important;
+            color: #fff !important
+        }
+
+        .my-navbar a:hover {
+            color: #45bcf9 !important;
+            background: transparent;
+            outline: 0
+        }
+
+        .my-navbar a {
+            transition: color 0.5s ease-in-out;
+        }
+
+        /*-webkit-transition ;-moz-transition*/
+        .top-nav {
+            padding: 0;
+            background: #000;
+        }
+
+        button.navbar-toggle {
+            background-color: #fbfbfb;
+        }
+
+        /*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+        button.navbar-toggle>span.icon-bar {
+            background-color: #dedede
+        }
+
+
+        .nav-header {
+            background: white;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./index.html">舆情可视化系统</a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- <ul class="nav nav-pills"> -->
+                    <li class="active">
+                        <a href="./index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./visualization.html">舆情可视化</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情分析</a>
+                    </li>
+                    <li>
+                        <a href="./report.html">舆情报告</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情预警</a>
+                    </li>
+                    <li>
+                        <a href="./market.html">舆情行情</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="bg" id="showtable"></div>
+    <script>
+        $(window).scroll(function () {
+            if ($(".navbar").offset().top > 50) {
+                $(".navbar-fixed-top").addClass("top-nav");
+            } else { $(".navbar-fixed-top").removeClass("top-nav"); }
+        })</script>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="media">
+				 <a href="#" class="pull-left"><img src="v3/default7.jpg" class="media-object" alt='' /></a>
+				<div class="media-body">
+                    <br>
+					<h1 class="media-heading">
+						<img class="TitleImage" src="https://pic4.zhimg.com/v2-c2354c68764b5015427c40c7f78ae6e7_1440w.jpg?source=172ae18b" alt="2019猪肉价格上涨市场舆情动态观察报告" />
+                    </h1>
+                    <br>
+					<h2 class="Post-Title">
+						2019猪肉价格上涨市场舆情动态观察报告
+                    </h2>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<header class="Post-Header">
+								<div class="Post-Author">
+									<div class="AuthorInfo">
+										<span class="UserLink AuthorInfo-avatarWrapper"></span>
+										<div class="Popover">
+											<div id="Popover9-toggle">
+												“站在风口上，猪也能飞起来”“恭喜部分网友，马上要实现牛肉跟猪肉一个价格的愿望了”……2019年，猪肉真的“飞”了起来。受非洲猪瘟、市场供求等诸多因素影响，自3月起，我国各地猪肉价格持续上涨，部分地区8月更是呈现跨越式增长，零售价每斤突破30元大关，甚至追平牛肉、羊肉。
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+                                    <br>
+									<p>
+										虽然在官方各项举措的调控下，猪肉价格目前有所回落、CPI指数增速平稳运行，但由猪肉价格变动引发的系列连锁问题，如关联产品物价上升，猪肉安全等，仍不可避免地对民生及相关产业产生了负面影响。如何减缓猪肉价格变动带来的冲击，维护市场稳定，保障市场供需关系良性循环，协调居民与生产者及商家之间的平衡关系，将会是社会各界持续关注的重点。
+									</p>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h2>
+						一、猪肉价格上涨概况
+					</h2>
+					<h3>
+						1.1 猪肉价格
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+									<figure>
+										<img src="https://pic3.zhimg.com/80/v2-73f2e733b7070431978243501186f2aa_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="616" alt='' />
+									</figure>
+									<figure>
+										<img src="https://pic2.zhimg.com/80/v2-4fbee79376df6bfbdd44fc793b0ef595_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="609" alt='' />
+                                    </figure>
+                                    <br>
+									<p>
+										2019年，受非洲猪瘟疫情、地方环保禁限养等因素的影响，全国猪肉价格整体呈上升趋势。今年3月，国内猪肉价格开始持续上涨，8月起，猪肉价格增速加大。据国家统计局数据显示，10月CPI同比上涨3.8%，涨幅比上月扩大0.8%，其中，猪肉价格上涨101.3%，对CPI整体带动接近64%，贡献率达到了近三分之二。随着扩大猪肉进口、促进生猪生产等一系列国家扶持政策的落实落地，生猪生产和猪肉供应能力逐渐恢复，公开数据显示全国猪肉价格在11月开始出现回落。
+									</p>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h3>
+						1.2 生猪产业链
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+									<figure>
+										<img src="https://pic2.zhimg.com/80/v2-ffc5beff3727ad68f2bfbc16f6730829_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="789" alt='' />
+                                    </figure>
+                                    <br>
+									<p>
+										因猪瘟影响，前期生猪出栏量大大降低，产能投入极速减少，受此影响，上游饲料加工市场压力持续增加。相较于上游，下游屠宰、销售及加工环节对猪肉价格更为敏感，其生产成本波动也更加明显。此外，猪肉价格的变动对畜牧、家禽、餐饮等多个关联产业也产生了一定的影响。
+									</p>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h3>
+						1.3 官方举措
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+									<figure>
+										<img src="https://pic3.zhimg.com/80/v2-a91b3990fb2e74d44ab1e1a533dc9686_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="566" alt='' />
+									</figure>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h2>
+						二、传播概况
+                    </h2>
+                    <br>
+                    <br>
+					<h3>
+						2.1 传播趋势
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+									<figure>
+										<img src="https://pic4.zhimg.com/80/v2-26cf5fb3ee8cb569546c5b5d28cf44af_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="640" alt='' />
+                                    </figure>
+                                    <br>
+									<p>
+										近三个月以来，全网关于“猪肉价格”的信息总量超过260万，其中，55.6%的信息分布在社交平台。8月起，猪肉价格大幅上涨，舆论主要围绕官方回应及举措、猪价上涨产生的影响等内容展开，“农业农村部回应猪肉价格上涨”“全国猪价地图出炉”“猪肉自由”“30000吨中央储备冻猪肉来了”等成为热门话题。11月，猪肉价格出现回落，相关信息成为该时段内舆论讨论焦点。
+									</p>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h3>
+						2.2 热词图
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+									<figure>
+										<img src="https://pic1.zhimg.com/80/v2-34bca6cdd6413c167882f6fb06d305ec_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="762" alt='' />
+                                    </figure>
+                                    <br>
+									<p>
+										近三个月以来，猪肉价格暴涨，“猪肉”“价格”“涨”“贵”等成为热门词汇。进入11月以后，猪肉价格开始下降，“回落”“跌”“降”等词频频出现。而猪肉价格暴涨的原因和带来的影响也是舆论讨论的焦点，词汇“非洲猪瘟”“物价”“CPI”等被多次提及。
+                                    </p>
+                                    <br>
+                                    <br>
+									<p>
+										<span>三、话题分析</span>
+                                    </p>
+                                    <br>
+                                    <br>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h3>
+						3.1 话题分布
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+									<figure>
+										<img src="https://pic3.zhimg.com/80/v2-aaa21e4b02b244738929b33f35bd3d16_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="619" alt='' />
+									</figure>
+									<figure>
+										<img src="https://pic1.zhimg.com/80/v2-d54b4b43ee326241ae6b5284643e7f1c_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="630" alt='' />
+									</figure>
+									<p class="ztext-empty-paragraph">
+                                    </p>
+                                    <br>
+									<p>
+										通过聚类分析，在“猪肉价格”相关信息中，媒体话题主要围绕官方回应及举措、猪肉价格变动情况展开。此外，部分媒体从消费者与生产者角度出发，对猪肉价格上涨对居民生活、相关产业带来的影响和变化情况进行了报道和分析。相较于媒体，网民话题更接地气。猪肉作为典型民生商品之一，价格一直是居民心中的敏感点，而由于猪肉过快的涨价速度，大部分网友的吐槽和调侃在公共议题中持续发酵。另外，部分网友针对猪肉价格上涨的原因及其对相关商品的影响也发表了不同见解，相关话题总占比21.1%。
+									</p>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h3>
+						3.2 舆论聚焦
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+                                    <br>
+									<p>
+										<span>3.2.1</span> <span>猪肉为什么涨价？</span>
+                                    </p>
+                                    <br>
+									<p>
+										近段时间以来，国内的猪肉价格一直处于高位运行。据国家统计局数据显示，8月猪肉价格同比上涨46.7%，环比涨幅达23.1%；而从市场情况来看，不少地方的猪肉价格涨幅已经超过了50%。国人直呼“吃不起猪肉”的同时，也开始关注猪肉涨价的背后原因。
+                                    </p>
+                                    <br>
+									<p>
+										对于猪肉价格大幅上涨的原因，虽然市场各方观点不尽统一，但舆论普遍认为非洲猪瘟疫情是导致猪肉价格上涨的重要原因。自2018年8月非洲猪瘟爆发以来，大量疑似患病生猪被扑杀或为避免患病而加快出栏，导致市场生猪供应一度紧张。据农业农村部数据显示，截至2019年7月3日，全国共扑杀了生猪116万余头；而2019年8月份生猪存栏环比下跌9.8%，同比减少38.7%。这些数据都直接反映了生猪存栏及猪肉供应市场的紧张状态。除了非洲猪瘟疫情外，不少舆论也认为生猪饲养环保标准的提高是猪肉价格上涨的一大诱因。随着畜禽养殖环保相关政策的出台，一些地方政府以改善生态环境为由，“一刀切”地将当地猪场关停，甚至个别龙头企业也未能幸免。这不仅让养殖企业和养殖户遭受了经济损失，也影响了生猪产量，导致市场猪肉供应趋紧，继而上调价格。另外，少数舆论认为，9月份出台的生猪调运禁令加快了部分地区猪肉价格的上涨速度。他们认为，虽然限制活猪跨省调运本意是为了防止猪瘟蔓延，但也使一些养猪弱省没有足量的猪肉供应，从而出现价格暴涨。
+									</p>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h3>
+						3.2.2 物价问题
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+                                    <br>
+                                    
+									<p>
+										猪肉价格持续上涨，连带影响牛肉、鸡肉、蛋类等猪肉替代品及猪副产品的价格也出现不同幅度的上升。10月份，全国居民消费价格同比上涨了3.8%，其中食品价格上涨15.5%，CPI涨幅不仅较9月继续有所扩大，也创下了近93个月以来的新高。“眼看着鸡肉从9块9涨到13块5”“云吞12块一碗涨到15块”“啥都涨价，工资不涨”……物价问题也成为舆论讨论的重点。
+                                    </p>
+                                    <br>
+									<p>
+										针对物价问题，网民表现出明显的焦虑情绪。多数网民认为开弓没有回头箭，即使未来猪肉价格受市场调控后或会回到正常价格，但期望猪副产品降价并不现实，尤其对于餐饮业来说，相关二次加工食品的降价可能性较低。而对于“猪肉领涨CPI会不会导致物价全面持续上涨”的问题，《人民日报》则在文章中表示：“猪肉只是CPI商品篮子里的一种商品，肉价上涨可能对短期CPI产生扰动，但不会撼动物价总水平稳定的运行基础，不会导致物价全面持续上涨。”
+                                    </p>
+                                    <br>
+									<p>
+										虽然物价市场的稳定最终还需市场自行调节，但物价关系民生，政府对于兜底保障民生、减轻物价上涨对困难群众生活影响的问题，除了进行补贴以外，还需要更为细化有效的政策出台和落实。
+									</p>
+								</div>
+							</div>
+						</article>
+                    </h4>
+                    <br>
+                    <br>
+					<h3>
+						3.3 社会情感
+                    </h3>
+                    <br>
+					<h4 class="media-heading">
+						<article class="Post-Main Post-NormalMain">
+							<div class="Post-RichTextContainer">
+								<div class="RichText ztext Post-RichText">
+									<figure>
+										<img src="https://pic3.zhimg.com/80/v2-4c0e53fc2baaf984444d5112bcbaabbe_720w.jpg" class="origin_image zh-lightbox-thumb lazy" width="577" alt='' />
+                                    </figure>
+                                    <br>
+									<p>
+										从情感分布来看，全网有关“猪肉价格”信息的社会情绪以中性为主，占比51.8%，主要内容多为猪肉价格变动情况、传播官方回应及举措信息等。负面言论占31.7%，相关言论主要为调侃猪肉价格上涨过快、吐槽和质疑猪肉关联产品价格联动上涨现象等。有关此次事件的正面言论占比16.5%，部分舆论表达了对各地官方措施的认可和对猪肉价格下降的期待，认为市场将再度平稳运行。
+                                    </p>
+                                    <br>
+									<p>
+										<span>本文使用舆论数据监测分析工具为识微商情系统，专注企业舆情监测/正负面新闻监测/竞争对手监测/品牌口碑监测/行业监测，<a href="https://link.zhihu.com/?target=https%3A//www.civiw.com/shiyong%3Fpk_campaign%3Dzhihu-wemedia" class=" wrap external" rel="nofollow noreferrer">免费申请系统试用</a>！</span>
+									</p>
+								</div>
+							</div>
+						</article>
+					</h4>
+					<div class="media">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

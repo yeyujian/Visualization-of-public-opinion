@@ -3,219 +3,333 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>舆情可视化</title>
-    <link href="./css/dh.css" rel="stylesheet" type="text/css">
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/normalize.min.css">
-    <link rel="stylesheet" href="css/animate.min.css">
-    <script type="text/javascript" src="js/echarts.min.js"></script>
-    <script src="js/echarts-wordcloud.min.js"></script>
-    <script src="js/dark.js"></script>
-    <script src="js/json/数据来源饼图.js"></script>
-    <script src="js/cy.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/json/舆情情感折线图2.js"></script>
-    <script src="js/json/舆情变化折线图.js"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/three.min.js"></script>
     <script src="js/tween.min.js"></script>
     <script src="js/TrackballControls.js"></script>
     <script src="js/CSS3DRenderer.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/animatedModal.js"></script>
+    <script src="js/data.js"></script>
+    <title>舆情可视化系统</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        /*非常重要的样式让背景图片100%适应整个屏幕*/
+        .bg {
+            display: table;
+            width: 100%;
+            height: 100%;
+            padding: 50px 0;
+            text-align: center;
+            color: #fff;
+            background: url(img/index.jpg) no-repeat bottom center;
+            background-color: #000;
+            background-size: cover;
+        }
+
+
+        .my-navbar {
+            padding: 20px 0;
+            transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+
+        .my-navbar a {
+            background: transparent !important;
+            color: #fff !important
+        }
+
+        .my-navbar a:hover {
+            color: #45bcf9 !important;
+            background: transparent;
+            outline: 0
+        }
+
+        .my-navbar a {
+            transition: color 0.5s ease-in-out;
+        }
+
+        /*-webkit-transition ;-moz-transition*/
+        .top-nav {
+            padding: 0;
+            background: #000;
+        }
+
+        button.navbar-toggle {
+            background-color: #fbfbfb;
+        }
+
+        /*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+        button.navbar-toggle>span.icon-bar {
+            background-color: #dedede
+        }
+
+
+        .nav-header {
+            background: white;
+            width: 100%;
+        }
+
+        body {
+            background: url('img/bg.png');
+            margin: 0;
+            font-family: Helvetica, sans-serif;
+            overflow: hidden;
+        }
+
+        .element {
+            width: 120px;
+            height: 160px;
+            box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+            border: 1px solid rgba(127, 255, 255, 0.25);
+            text-align: center;
+            cursor: default;
+        }
+
+        .element:hover {
+            box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+            border: 1px solid rgba(127, 255, 255, 0.75);
+        }
+
+        .element .number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: rgba(127, 255, 255, 0.75);
+        }
+
+        .element .symbol {
+            position: absolute;
+            top: 40px;
+            left: 0px;
+            right: 0px;
+            font-size: 50px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.75);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+        }
+
+        .element .details {
+            position: absolute;
+            bottom: 15px;
+            left: 0px;
+            right: 0px;
+            font-size: 12px;
+            color: rgba(127, 255, 255, 0.75);
+        }
+    </style>
 </head>
 
 <body>
-    <div class="box">
-        <div class="change-type">
-            <div class="type-left" :class="showType == true ? 'showListType':''">
-                <ul>
-                    <li><a>首页</a><span></span></li>
-                    <li class="active"><a>舆情可视化</a><span></span></li>
-                    <li><a>舆情分析</a><span></span></li>
-                    <li><a>舆情报告</a><span></span></li>
-                    <li><a>舆情预警</a><span></span></li>
-                    <li><a>舆情行情</a><span></span></li>
+    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./index.html">舆情可视化系统</a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- <ul class="nav nav-pills"> -->
+                    <li class="active">
+                        <a href="./index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./visualization.html">舆情可视化</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情分析</a>
+                    </li>
+                    <li>
+                        <a href="./report.html">舆情报告</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情预警</a>
+                    </li>
+                    <li>
+                        <a href="./market.html">舆情行情</a>
+                    </li>
+                    <!-- </ul> -->
                 </ul>
             </div>
-            <div class="type-right">
-                <p>
-                    <i class="el-icon-menu"></i>
-                    导航
-                </p>
-            </div>
         </div>
-    </div>
-    <script>
-        $(function(){
-            $('.type-right').click(function(){
-                $(this).prev('.type-left').toggleClass('showListType')
-            });
-            $('.type-left ul li').click(function(){
-                $(this).addClass('active').siblings('li').removeClass('active')
-            })
-        })
-    </script>
-    <div class="header-title">
-        <h3>舆情可视化界面</h3>
-    </div>
-    <div class="container">
-        <div class="top">
-            <div class="top-item top-item-first">
-                <div class="item-title">舆情数据来源</div>
-                <div class="item-table" id="table1"></div>
-                <span class="b-left-top"></span>
-                <span class="b-right-top"></span>
-                <span class="b-left-bottom"></span>
-                <span class="b-right-bottom"></span>
-            </div>
-            <div class="top-item top-item-second">
-                <a id="modalTable2" href="#animatedModalTable2">
-                    <div class="item-title">热点词</div>
-                </a>
-                <div class="item-table" id="table2"></div>
-                <span class="b-left-top"></span>
-                <span class="b-right-top"></span>
-                <span class="b-left-bottom"></span>
-                <span class="b-right-bottom"></span>
+    </nav>
+    <div class="bg" id="showtable"></div>
 
-            </div>
-            <div class="top-item top-item-third">
-                <div class="item-title">舆情占比</div>
-                <div class="item-table" id="table3"></div>
-                <span class="b-left-top"></span>
-                <span class="b-right-top"></span>
-                <span class="b-left-bottom"></span>
-                <span class="b-right-bottom"></span>
-            </div>
-            <div class="top-item top-item-four">
-                <div class="item-title">TOP10 关键词</div>
-                <div class="item-table" id="table4">
-                    <div class="topRec_List">
-                        <dl>
-                            <dd>涉及内容</dd>
-                            <dd>舆情量</dd>
-                        </dl>
-                        <div class="maquee">
-                            <ul style="margin-top: 0px;">
-                                <li>
-                                    <div>暴力催收</div>
-                                    <div>1049</div>
-                                </li>
-                                <li>
-                                    <div>高利贷</div>
-                                    <div>649</div>
-                                </li>
-                                <li>
-                                    <div>产品逾期</div>
-                                    <div>498</div>
-                                </li>
-                                <li>
-                                    <div>砍头息</div>
-                                    <div>381</div>
-                                </li>
-                                <li>
-                                    <div>骗子</div>
-                                    <div>371</div>
-                                </li>
-                                <li>
-                                    <div>无法回款</div>
-                                    <div>347</div>
-                                </li>
-                                <li>
-                                    <div>提现困难</div>
-                                    <div>326</div>
-                                </li>
-                                <li>
-                                    <div>兑付困难</div>
-                                    <div>324</div>
-                                </li>
-                                <li>
-                                    <div>客服态度恶劣</div>
-                                    <div>245</div>
-                                </li>
-                                <li>
-                                    <div>高额服务费</div>
-                                    <div>202</div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <span class="b-left-top"></span>
-                <span class="b-right-top"></span>
-                <span class="b-left-bottom"></span>
-                <span class="b-right-bottom"></span>
-            </div>
-        </div>
-        <div class="bottom">
-            <div class="bottom-item bottom-item-first">
-                <a id="modalTable5" href="#animatedModalTable5">
-                    <div class="item-title">舆情变化</div>
-                </a>
-                <div class="item-table" id="table5"></div>
-                <span class="b-left-top"></span>
-                <span class="b-right-top"></span>
-                <span class="b-left-bottom"></span>
-                <span class="b-right-bottom"></span>
-            </div>
-            <div class="bottom-item bottom-item-second">
-                <div class="item-title">有效舆情总量</div>
-                <div class="item-table" id="table6"></div>
-                <span class="b-left-top"></span>
-                <span class="b-right-top"></span>
-                <span class="b-left-bottom"></span>
-                <span class="b-right-bottom"></span>
-            </div>
-            <div class="bottom-item bottom-item-third">
-                <a id="modalTable7" href="#animatedModalTable7">
-                    <div class="item-title">每月舆情变化量</div>
-                </a>
-                <div class="item-table" id="table7"></div>
-                <span class="b-left-top"></span>
-                <span class="b-right-top"></span>
-                <span class="b-left-bottom"></span>
-                <span class="b-right-bottom"></span>
-            </div>
-        </div>
-    </div>
-    <div id="animatedModalTable2">
-        <div id="btn-close-modal" class="close-animatedModalTable2">
-            X
-        </div>
-        <div class="modal-content" id="container2">
-        </div>
-    </div>
-    <div id="animatedModalTable5">
-        <div id="btn-close-modal" class="close-animatedModalTable5">
-            X
-        </div>
-        <div class="modal-content" id="container5" style="height: 100vh;width:95%;">
-        </div>
-    </div>
-    <div id="animatedModalTable7">
-        <div id="btn-close-modal" class="close-animatedModalTable7">
-            X
-        </div>
-        <div class="modal-content" id="container7" style="height: 100vh;width:95%;">
-        </div>
-    </div>
-    <script src="js/buildTable.js"></script>
-    <script src="js/3dTable2.js">
-    </script>
     <script>
-        $("#modalTable5").animatedModal({
-            color: "rgba(0,0,0,0.8)",
-            beforeOpen: function () {
-                randomTable();
+        $(window).scroll(function () {
+            if ($(".navbar").offset().top > 50) {
+                $(".navbar-fixed-top").addClass("top-nav");
+            } else { $(".navbar-fixed-top").removeClass("top-nav"); }
+        })</script>
+
+    <script>
+        var camera, scene, renderer;
+        var controls;
+
+        var objects = [];
+        var targets = { sphere: [] };
+
+        init();
+        animate();
+
+        function init() {
+
+            camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000);
+            camera.position.z = 2450;
+
+            scene = new THREE.Scene();
+
+
+            //random
+            let x1 = 1, y1 = 1;
+            let row1 = Math.ceil(table2.length / 18);
+            for (var i = 0; i < table2.length; i++) {
+
+                var element = document.createElement('div');
+                element.className = 'element';
+                element.style.backgroundColor = 'rgba(0,100,127,' + (Math.random() * 0.5 + 0.25) + ')';
+
+                var number = document.createElement('div');
+                number.className = 'number';
+                number.textContent = i + 1;
+                element.appendChild(number);
+
+                var symbol = document.createElement('div');
+                symbol.className = 'symbol';
+                symbol.textContent = table2[i]["name"];
+                element.appendChild(symbol);
+
+                var details = document.createElement('div');
+                details.className = 'details';
+                details.innerHTML = table2[i]["count"];
+                element.appendChild(details);
+
+                var object = new THREE.CSS3DObject(element);
+                object.position.x = Math.random() * 4000 - 2000;
+                object.position.y = Math.random() * 4000 - 2000;
+                object.position.z = Math.random() * 4000 - 2000;
+                scene.add(object);
+
+                objects.push(object);
+
+                //
+
+
             }
-        });
-        $("#modalTable7").animatedModal({
-            color: "rgba(0,0,0,0.8)",
-            beforeOpen: function () {
-                randomTable();
+            // sphere
+
+            var vector = new THREE.Vector3();
+
+            for (var i = 0, l = objects.length; i < l; i++) {
+
+                var phi = Math.acos(-1 + (2 * i) / l);
+                var theta = Math.sqrt(l * Math.PI) * phi;
+
+                var object = new THREE.Object3D();
+
+                object.position.x = 800 * Math.cos(theta) * Math.sin(phi);
+                object.position.y = 800 * Math.sin(theta) * Math.sin(phi);
+                object.position.z = 800 * Math.cos(phi);
+
+                vector.copy(object.position).multiplyScalar(2);
+
+                object.lookAt(vector);
+
+                targets.sphere.push(object);
+
             }
-        });
+
+
+
+            //
+
+            renderer = new THREE.CSS3DRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight-49);
+            renderer.domElement.style.position = 'absolute';
+            document.getElementById('showtable').appendChild(renderer.domElement);
+
+            //
+
+            controls = new THREE.TrackballControls(camera, renderer.domElement);
+            controls.rotateSpeed = 0.5;
+            controls.minDistance = 500;
+            controls.maxDistance = 3000;
+            controls.addEventListener('change', render);
+
+
+            transform(targets.sphere, 3000);
+
+            //
+
+            window.addEventListener('resize', onWindowResize, false);
+
+        }
+
+        function transform(targets, duration) {
+
+            TWEEN.removeAll();
+
+            for (var i = 0; i < objects.length; i++) {
+
+                var object = objects[i];
+                var target = targets[i];
+
+                new TWEEN.Tween(object.position)
+                    .to({ x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration)
+                    .easing(TWEEN.Easing.Exponential.InOut)
+                    .start();
+
+                new TWEEN.Tween(object.rotation)
+                    .to({ x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration)
+                    .easing(TWEEN.Easing.Exponential.InOut)
+                    .start();
+
+            }
+
+            new TWEEN.Tween(this)
+                .to({}, duration * 2)
+                .onUpdate(render)
+                .start();
+
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth /( window.innerHeight);
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            render();
+
+        }
+
+        function animate() {
+
+            requestAnimationFrame(animate);
+
+            TWEEN.update();
+
+            controls.update();
+
+        }
+
+        function render() {
+
+            renderer.render(scene, camera);
+
+        }    
     </script>
 </body>
 

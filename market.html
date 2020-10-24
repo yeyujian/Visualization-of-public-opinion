@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="js/china.js"></script>
+    <script src="js/maptable.js"></script>
+    <title>舆情行情</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        /*非常重要的样式让背景图片100%适应整个屏幕*/
+        .bg {
+            display: table;
+            width: 100%;
+            height: 100%;
+            padding: 50px 0;
+            text-align: center;
+            color: #fff;
+            background: url(./img/bg2.jpg) no-repeat bottom center;
+            background-color: #000;
+            background-size: cover;
+        }
+
+
+        .my-navbar {
+            padding: 20px 0;
+            transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+
+        .my-navbar a {
+            background: transparent !important;
+            color: #fff !important
+        }
+
+        .my-navbar a:hover {
+            color: #45bcf9 !important;
+            background: transparent;
+            outline: 0
+        }
+
+        .my-navbar a {
+            transition: color 0.5s ease-in-out;
+        }
+
+        /*-webkit-transition ;-moz-transition*/
+        .top-nav {
+            padding: 0;
+            background: #000;
+        }
+
+        button.navbar-toggle {
+            background-color: #fbfbfb;
+        }
+
+        /*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+        button.navbar-toggle>span.icon-bar {
+            background-color: #dedede
+        }
+
+
+        .nav-header {
+            background: white;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./index.html">舆情可视化系统</a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- <ul class="nav nav-pills"> -->
+                    <li class="active">
+                        <a href="./index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./visualization.html">舆情可视化</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情分析</a>
+                    </li>
+                    <li>
+                        <a href="./report.html">舆情报告</a>
+                    </li>
+                    <li>
+                        <a href="./continue.html">舆情预警</a>
+                    </li>
+                    <li>
+                        <a href="./market.html">舆情行情</a>
+                    </li>
+                    <!-- </ul> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="bg" id="showtable"></div>
+    <div id="container" style="width: 100%;height: 100%;"></div>
+    <script>
+        $(window).scroll(function () {
+            if ($(".navbar").offset().top > 50) {
+                $(".navbar-fixed-top").addClass("top-nav");
+            } else { $(".navbar-fixed-top").removeClass("top-nav"); }
+        })</script>
+   <script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    myChart.showLoading();
+    function geoJson() {
+        echarts.registerMap('china', tableData);
+        myChart.hideLoading();
+        var geoCoordMap = {
+            '北京': [116.4551, 40.2539],
+            "天津": [117.4219, 39.4189],
+            "山东": [117.1582, 36.8701],
+            "江苏": [118.8062, 31.9208],
+            "安徽": [117.29, 32.0581],
+            "浙江": [119.5313, 29.8773],
+            "江西": [116.0046, 28.6633],
+            "福建": [119.4543, 25.9222],
+            "广东": [113.12244, 23.009505],
+            "海南": [110.3893, 19.8516],
+            '上海': [121.4648, 31.2891],
+
+        };
+        var data = [
+            { name: "北京", value: 199 },
+            { name: "天津", value: 42 },
+            { name: "上海", value: 24 },
+            { name: "江苏", value: 92 },
+            { name: "浙江", value: 114 },
+            { name: "安徽", value: 109 },
+            { name: "福建", value: 116 },
+            { name: "江西", value: 91 },
+            { name: "山东", value: 119 },
+            { name: "广东", value: 123 },
+            { name: "海南", value: 14 },
+        ];
+        var max = 480,
+            min = 9; // todo 
+        var maxSize4Pin = 100,
+            minSize4Pin = 20;
+
+        var convertData = function (data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var geoCoord = geoCoordMap[data[i].name];
+                if (geoCoord) {
+                    res.push({
+                        name: data[i].name,
+                        value: geoCoord.concat(data[i].value)
+                    });
+                }
+            }
+            return res;
+        };
+
+
+
+        option = {
+            backgroundColor: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 1,
+                colorStops: [{
+                    offset: 0,
+                    color: '#0f378f' // 0% 处的颜色
+                }, {
+                    offset: 1,
+                    color: '#00091a' // 100% 处的颜色
+                }],
+                globalCoord: false // 缺省为 false
+            },
+            title: {
+                top: 20,
+                text: '舆情行情',
+                subtext: '',
+                x: 'center',
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip: {
+                trigger: 'item',
+                formatter: function (params) {
+                    if (typeof (params.value)[2] == "undefined") {
+                        return params.name + ' : ' + params.value;
+                    } else {
+                        return params.name + ' : ' + params.value[2];
+                    }
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                y: 'bottom',
+                x: 'right',
+                data: ['pm2.5'],
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            visualMap: {
+                show: false,
+                min: 0,
+                max: 500,
+                left: 'left',
+                top: 'bottom',
+                text: ['高', '低'], // 文本，默认为数值文本
+                calculable: true,
+                seriesIndex: [1],
+                inRange: {
+
+                }
+            },
+            geo: {
+                map: 'china',
+                show: true,
+                roam: true,
+                label: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: false,
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        areaColor: '#3a7fd5',
+                        borderColor: '#0a53e9', //线
+                        shadowColor: '#092f8f', //外发光
+                        shadowBlur: 20
+                    },
+                    emphasis: {
+                        areaColor: '#0a2dae', //悬浮区背景
+                    }
+                }
+            },
+            series: [{
+
+                symbolSize: 5,
+                label: {
+                    normal: {
+                        formatter: '{b}',
+                        position: 'right',
+                        show: true
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#fff'
+                    }
+                },
+                name: 'light',
+                type: 'scatter',
+                coordinateSystem: 'geo',
+                data: convertData(data),
+
+            },
+            {
+                type: 'map',
+                map: 'china',
+                geoIndex: 0,
+                aspectScale: 0.75, //长宽比
+                showLegendSymbol: false, // 存在legend时显示
+                label: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                roam: true,
+                itemStyle: {
+                    normal: {
+                        areaColor: '#031525',
+                        borderColor: '#FFFFFF',
+                    },
+                    emphasis: {
+                        areaColor: '#2B91B7'
+                    }
+                },
+                animation: false,
+                data: data
+            },
+            {
+                name: 'Top 5',
+                type: 'scatter',
+                coordinateSystem: 'geo',
+                symbol: 'pin',
+                symbolSize: [50, 50],
+                label: {
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 9,
+                        },
+                        formatter(value) {
+                            return value.data.value[2]
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#D8BC37', //标志颜色
+                    }
+                },
+                data: convertData(data),
+                showEffectOn: 'render',
+                rippleEffect: {
+                    brushType: 'stroke'
+                },
+                hoverAnimation: true,
+                zlevel: 1
+            },
+
+            ]
+        };
+
+        myChart.setOption(option);
+
+        window.addEventListener('resize', function () {
+            myChart.resize();
+        });
+    }
+    geoJson();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>舆情可视化</title>
+    <link href="./css/dh.css" rel="stylesheet" type="text/css">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script src="js/echarts-wordcloud.min.js"></script>
+    <script src="js/dark.js"></script>
+    <script src="js/json/数据来源饼图.js"></script>
+    <script src="js/cy.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/json/舆情情感折线图2.js"></script>
+    <script src="js/json/舆情变化折线图.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/tween.min.js"></script>
+    <script src="js/TrackballControls.js"></script>
+    <script src="js/CSS3DRenderer.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/animatedModal.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="change-type">
+            <div class="type-left" :class="showType == true ? 'showListType':''">
+                <ul>
+                    <li><a href="./index.html">首页</a><span></span></li>
+                    <li class="active"><a href="./visualization.html">舆情可视化</a><span></span></li>
+                    <li><a href="./continue.html">舆情分析</a><span></span></li>
+                    <li><a href="./report.html">舆情报告</a><span></span></li>
+                    <li><a href="./continue.html">舆情预警</a><span></span></li>
+                    <li><a href="./report.html">舆情行情</a><span></span></li>
+                </ul>
+            </div>
+            <div class="type-right">
+                <p>
+                    <i class="el-icon-menu"></i>
+                    导航
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('.type-right').click(function(){
+                $(this).prev('.type-left').toggleClass('showListType')
+            });
+            $('.type-left ul li').click(function(){
+                $(this).addClass('active').siblings('li').removeClass('active')
+            })
+        })
+    </script>
+    <div class="header-title">
+        <h3>舆情可视化界面</h3>
+    </div>
+    <div class="container">
+        <div class="top">
+            <div class="top-item top-item-first">
+                <div class="item-title">舆情数据来源</div>
+                <div class="item-table" id="table1"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="top-item top-item-second">
+                <a id="modalTable2" href="#animatedModalTable2">
+                    <div class="item-title">热点词</div>
+                </a>
+                <div class="item-table" id="table2"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+
+            </div>
+            <div class="top-item top-item-third">
+                <div class="item-title">舆情占比</div>
+                <div class="item-table" id="table3"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="top-item top-item-four">
+                <div class="item-title">TOP10 关键词</div>
+                <div class="item-table" id="table4">
+                    <div class="topRec_List">
+                        <dl>
+                            <dd>涉及内容</dd>
+                            <dd>舆情量</dd>
+                        </dl>
+                        <div class="maquee">
+                            <ul style="margin-top: 0px;">
+                                <li>
+                                    <div>暴力催收</div>
+                                    <div>1049</div>
+                                </li>
+                                <li>
+                                    <div>高利贷</div>
+                                    <div>649</div>
+                                </li>
+                                <li>
+                                    <div>产品逾期</div>
+                                    <div>498</div>
+                                </li>
+                                <li>
+                                    <div>砍头息</div>
+                                    <div>381</div>
+                                </li>
+                                <li>
+                                    <div>骗子</div>
+                                    <div>371</div>
+                                </li>
+                                <li>
+                                    <div>无法回款</div>
+                                    <div>347</div>
+                                </li>
+                                <li>
+                                    <div>提现困难</div>
+                                    <div>326</div>
+                                </li>
+                                <li>
+                                    <div>兑付困难</div>
+                                    <div>324</div>
+                                </li>
+                                <li>
+                                    <div>客服态度恶劣</div>
+                                    <div>245</div>
+                                </li>
+                                <li>
+                                    <div>高额服务费</div>
+                                    <div>202</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="bottom-item bottom-item-first">
+                <a id="modalTable5" href="#animatedModalTable5">
+                    <div class="item-title">舆情变化</div>
+                </a>
+                <div class="item-table" id="table5"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="bottom-item bottom-item-second">
+                <div class="item-title">有效舆情总量</div>
+                <div class="item-table" id="table6"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+            <div class="bottom-item bottom-item-third">
+                <a id="modalTable7" href="#animatedModalTable7">
+                    <div class="item-title">每月舆情变化量</div>
+                </a>
+                <div class="item-table" id="table7"></div>
+                <span class="b-left-top"></span>
+                <span class="b-right-top"></span>
+                <span class="b-left-bottom"></span>
+                <span class="b-right-bottom"></span>
+            </div>
+        </div>
+    </div>
+    <div id="animatedModalTable2">
+        <div id="btn-close-modal" class="close-animatedModalTable2">
+            X
+        </div>
+        <div class="modal-content" id="container2">
+        </div>
+    </div>
+    <div id="animatedModalTable5">
+        <div id="btn-close-modal" class="close-animatedModalTable5">
+            X
+        </div>
+        <div class="modal-content" id="container5" style="height: 100vh;width:95%;">
+        </div>
+    </div>
+    <div id="animatedModalTable7">
+        <div id="btn-close-modal" class="close-animatedModalTable7">
+            X
+        </div>
+        <div class="modal-content" id="container7" style="height: 100vh;width:95%;">
+        </div>
+    </div>
+    <script src="js/buildTable.js"></script>
+    <script src="js/3dTable2.js">
+    </script>
+    <script>
+        $("#modalTable5").animatedModal({
+            color: "rgba(0,0,0,0.8)",
+            beforeOpen: function () {
+                randomTable();
+            }
+        });
+        $("#modalTable7").animatedModal({
+            color: "rgba(0,0,0,0.8)",
+            beforeOpen: function () {
+                randomTable();
+            }
+        });
+    </script>
+</body>
+
+</html>
