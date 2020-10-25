@@ -97,51 +97,22 @@
                             <dd>舆情量</dd>
                         </dl>
                         <div class="maquee">
-                            <ul style="margin-top: 0px;">
-                                <li>
-                                    <div>暴力催收</div>
-                                    <div>1049</div>
-                                </li>
-                                <li>
-                                    <div>高利贷</div>
-                                    <div>649</div>
-                                </li>
-                                <li>
-                                    <div>产品逾期</div>
-                                    <div>498</div>
-                                </li>
-                                <li>
-                                    <div>砍头息</div>
-                                    <div>381</div>
-                                </li>
-                                <li>
-                                    <div>骗子</div>
-                                    <div>371</div>
-                                </li>
-                                <li>
-                                    <div>无法回款</div>
-                                    <div>347</div>
-                                </li>
-                                <li>
-                                    <div>提现困难</div>
-                                    <div>326</div>
-                                </li>
-                                <li>
-                                    <div>兑付困难</div>
-                                    <div>324</div>
-                                </li>
-                                <li>
-                                    <div>客服态度恶劣</div>
-                                    <div>245</div>
-                                </li>
-                                <li>
-                                    <div>高额服务费</div>
-                                    <div>202</div>
-                                </li>
+                            <ul style="margin-top: 0px;" id="table-lsit">
                             </ul>
                         </div>
                     </div>
                 </div>
+                <script>
+                    let num=0;
+                    for(var item of table2){
+                        $("#table-lsit").append(` <li>
+                                    <div>${item['name']}</div>
+                                    <div>${item['count']}</div>
+                                </li>`);
+                        num++;
+                        if(num>=10) break;
+                    }
+                </script>
                 <span class="b-left-top"></span>
                 <span class="b-right-top"></span>
                 <span class="b-left-bottom"></span>

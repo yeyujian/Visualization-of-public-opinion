@@ -1,5 +1,5 @@
-echarts.init(document.getElementById("table1")).setOption((() => {
-    var app = {};
+var charts1 = echarts.init(document.getElementById("table1"));
+charts1.setOption((() => {
     var option = null;
     var labels = [];
     for (var val of table1) {
@@ -43,7 +43,9 @@ echarts.init(document.getElementById("table1")).setOption((() => {
     };
     return option;
 })(), true);
-
+window.addEventListener('resize', function () {
+    chart1.resize();
+});
 //table2
 function initTable2() {
     var myChart = echarts.init(document.getElementById('table2'));
@@ -121,13 +123,17 @@ function initTable2() {
                 data: data
             },]
         });
+
     };
     maskImage.src = symbolUrl;
+    window.addEventListener('resize', function () {
+        myChart.resize();
+    });
 }
 initTable2();
 
 //table3
-echarts.init(document.getElementById("table3")).setOption((() => {
+var chart3 = echarts.init(document.getElementById("table3"));chart3.setOption((() => {
     var option = null;
     option = {
         tooltip: {
@@ -161,7 +167,9 @@ echarts.init(document.getElementById("table3")).setOption((() => {
     };
     return option;
 })(), true);
-
+window.addEventListener('resize', function () {
+    chart3.resize();
+});
 //table5
 
 function initTable5() {
@@ -270,6 +278,11 @@ function initTable5() {
         myChart.setOption(option, true);
         myChart2.setOption(option);
     }
+    window.addEventListener('resize', function () {
+        myChart.resize();
+        myChart2.resize();
+    });
+    
 }
 initTable5();
 
@@ -330,6 +343,9 @@ function initTable6() {
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
+    window.addEventListener('resize', function () {
+        myChart.resize();
+    });
 }
 initTable6();
 
@@ -400,5 +416,9 @@ function initTable7() {
         myChart.setOption(option, true);
         myChart2.setOption(option, true);
     }
+    window.addEventListener('resize', function () {
+        myChart.resize();
+        myChart2.resize();
+    });
 }
 initTable7();
