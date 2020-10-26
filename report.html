@@ -74,7 +74,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">
+    <nav class="navbar navbar-fixed-top my-navbar top-nav" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -110,13 +110,6 @@
             </div>
         </div>
     </nav>
-    <div class="bg" id="showtable"></div>
-    <script>
-        $(window).scroll(function () {
-            if ($(".navbar").offset().top > 50) {
-                $(".navbar-fixed-top").addClass("top-nav");
-            } else { $(".navbar-fixed-top").removeClass("top-nav"); }
-        })</script>
 
     <div class="container">
         <div class="row clearfix">
