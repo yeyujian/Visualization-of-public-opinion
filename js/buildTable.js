@@ -289,62 +289,71 @@ initTable5();
 function initTable6() {
     var dom = document.getElementById("table6");
     var myChart = echarts.init(dom);
+    var myChart2 = echarts.init(document.getElementById("container6"));
+    var XAxis = [];
+    var neutralData = [];
+    for (var val of table6) {
+        XAxis.push(val["name"]);
+        neutralData.push(val["value"]);
+    }
     option = null;
     option = {
-
-        xAxis: [
-            {
-                type: 'category',
-                data: ['四月舆情', '五月舆情'],
-                axisLabel: {
-                    textStyle: {
-                        color: '#fff',//坐标值得具体的颜色
-                    }
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: {
+            left: '0%',
+            right: '5%',
+            bottom: '5%',
+            containLabel: true
+        },
+        legend: {
+            data: ['价格'],
+            icon: 'rectangle',
+            textStyle: {
+                fontSize: 12,
+                color: '#fff'
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: XAxis,
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',//坐标值得具体的颜色
                 }
             }
-        ],
-        yAxis: [
-            {
-                type: 'value'
-            }
-        ],
-        color: ['rgba(0,110,127,0.8)'],
-        series: [
-
-            {
-                name: '搜索引擎',
-                type: 'bar',
-                data: [862, 1018],
-                markLine: {
-                    lineStyle: {
-                        type: 'solid',
-                        color: "red",
-                        width: 2.5,
-                    },
-                    label: {
-                        position: "middle",         //将警示值放在哪个位置，三个值“start”,"middle","end"  开始  中点 结束
-                        formatter: "45546\n环比上升 8.5%",
-                        color: "red",
-                        textStyle: {
-                            fontSize: 16,
-                            fontWeight: "bolder",
-                        },
-                    },
-                    data: [
-                        [{ type: 'min', symbol: 'circle' },
-                        { type: 'max' }]
-                    ],
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: {
+                lineStyle: {
+                    type: 'solid',
+                    color: '#ffffff',//左边线的颜色
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',//坐标值得具体的颜色
 
                 }
             }
-        ]
+        },
+        series: [{
+            name: '价格',
+            type: 'line',
+            stack: '总量',
+            data: neutralData
+        }]
     };
-    ;
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
+        myChart2.setOption(option, true);
     }
     window.addEventListener('resize', function () {
         myChart.resize();
+        myChart2.resize();
     });
 }
 initTable6();

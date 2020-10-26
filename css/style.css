@@ -145,14 +145,10 @@ div {
 
 .bottom .bottom-item {
     height: 400px;
-    width: 42%;
+    width: 33%;
     margin: 3px;
     position: relative;
     float: left;
-}
-
-.bottom .bottom-item-second {
-    width: 15%;
 }
 
 .item-title {

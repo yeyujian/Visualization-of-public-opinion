@@ -17,6 +17,7 @@
     <script src="js/data.js"></script>
     <script src="js/json/舆情情感折线图2.js"></script>
     <script src="js/json/舆情变化折线图.js"></script>
+    <script src="js/prime.js"></script>
     <script src="js/three.min.js"></script>
     <script src="js/tween.min.js"></script>
     <script src="js/TrackballControls.js"></script>
@@ -47,11 +48,11 @@
         </div>
     </div>
     <script>
-        $(function(){
-            $('.type-right').click(function(){
+        $(function () {
+            $('.type-right').click(function () {
                 $(this).prev('.type-left').toggleClass('showListType')
             });
-            $('.type-left ul li').click(function(){
+            $('.type-left ul li').click(function () {
                 $(this).addClass('active').siblings('li').removeClass('active')
             })
         })
@@ -103,14 +104,14 @@
                     </div>
                 </div>
                 <script>
-                    let num=0;
-                    for(var item of table2){
+                    let num = 0;
+                    for (var item of table2) {
                         $("#table-lsit").append(` <li>
                                     <div>${item['name']}</div>
                                     <div>${item['count']}</div>
                                 </li>`);
                         num++;
-                        if(num>=10) break;
+                        if (num >= 10) break;
                     }
                 </script>
                 <span class="b-left-top"></span>
@@ -131,7 +132,9 @@
                 <span class="b-right-bottom"></span>
             </div>
             <div class="bottom-item bottom-item-second">
-                <div class="item-title">有效舆情总量</div>
+                <a id="modalTable6" href="#animatedModalTable6">
+                    <div class="item-title">猪肉价格</div>
+                </a>
                 <div class="item-table" id="table6"></div>
                 <span class="b-left-top"></span>
                 <span class="b-right-top"></span>
@@ -164,6 +167,13 @@
         <div class="modal-content" id="container5" style="height: 100vh;width:95%;">
         </div>
     </div>
+    <div id="animatedModalTable6">
+        <div id="btn-close-modal" class="close-animatedModalTable6">
+            X
+        </div>
+        <div class="modal-content" id="container6" style="height: 100vh;width:95%;">
+        </div>
+    </div>
     <div id="animatedModalTable7">
         <div id="btn-close-modal" class="close-animatedModalTable7">
             X
@@ -176,6 +186,12 @@
     </script>
     <script>
         $("#modalTable5").animatedModal({
+            color: "rgba(0,0,0,0.8)",
+            beforeOpen: function () {
+                randomTable();
+            }
+        });
+        $("#modalTable6").animatedModal({
             color: "rgba(0,0,0,0.8)",
             beforeOpen: function () {
                 randomTable();
