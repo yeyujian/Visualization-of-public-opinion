@@ -145,7 +145,7 @@ var chart3 = echarts.init(document.getElementById("table3"));chart3.setOption(((
             type: 'pie',
             radius: '55%',
             center: ['50%', '50%'],
-            data: [{ name: "正面", value: 23353 }, { name: "负面", value: 2701 }, { name: "中性", value: 2419 }],
+            data: [ { name: "中性", value:  23353 },{ name: "正面", value: 2419 }, { name: "负面", value: 2701 }],
             emphasis: {
                 itemStyle: {
                     shadowBlur: 10,
